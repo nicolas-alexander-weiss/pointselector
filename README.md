@@ -8,7 +8,7 @@ This is the preferred tool to be run.
 
 **Dependencies**: numpy, matplotlib
 
-**Execution**: *python3 simplexselector*
+**Execution**: *python3 simplexselector.py*
 
 **Usage**:
 
