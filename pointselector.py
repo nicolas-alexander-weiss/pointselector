@@ -22,13 +22,15 @@ class Point_2D:
 
     def to_numpy(self):
         return np.array([self.x, self.y])
-
+    
+    def distance(p1, p2) -> float:
+        return np.sqrt(np.square(p1.x - p2.x) + np.square(p1.y - p2.y))
 
 class Point_Selector:
 
     def __init__(self, x_range=(0, 1), y_range=(0, 1)):
 
-        self.selected_points = set()
+        self.point_list = []
 
         ##### PYPLOT CODE ##########
 
@@ -49,7 +51,7 @@ class Point_Selector:
         x, y = event.xdata, event.ydata
         if x is not None and y is not None:
             # add the point to selection
-            self.selected_points.add(Point_2D(x, y))
+            self.point_list.append(Point_2D(x, y))
             # Plot the point
             self.ax.plot(x, y, "ro")  # Red dot for clicked points
             self.fig.canvas.draw()  # Redraw the figure
@@ -64,7 +66,7 @@ class Point_Selector:
         ----------
         set of Point_2D
         """
-        return self.selected_points
+        return self.point_list
 
     def get_points_numpy(self):
         """Returns the set of points as a numpy array.
@@ -73,7 +75,7 @@ class Point_Selector:
         ----------
         2d numpy array, each row a point.
         """
-        return np.array([p.to_numpy() for p in self.selected_points])
+        return np.array([p.to_numpy() for p in self.point_list])
 
 
 if __name__ == "__main__":
@@ -91,4 +93,4 @@ if __name__ == "__main__":
     points = point_selector.get_points_numpy()
 
     # Outputs selected points:
-    print(f"Selected points:\n{points}")
+    print(f"Selected points:\n{points.__repr__()}")
